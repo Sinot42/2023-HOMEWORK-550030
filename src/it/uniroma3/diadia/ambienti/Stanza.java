@@ -137,13 +137,9 @@ public class Stanza {
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		boolean trovato;
 		trovato = false;
-		if(nomeAttrezzo!=null) {
-			for (Attrezzo attrezzo : this.attrezzi) {
-				if(attrezzo!=null) {
-					if (attrezzo.getNome().equals(nomeAttrezzo))
-						trovato = true;
-				}
-			}
+		for (Attrezzo attrezzo : this.attrezzi) {
+			if (attrezzo.getNome().equals(nomeAttrezzo))
+				trovato = true;
 		}
 		return trovato;
 	}
@@ -187,6 +183,7 @@ public class Stanza {
 				}
 		if (risposta==1) return true;
 		else return false;
+
 	}
 
 
