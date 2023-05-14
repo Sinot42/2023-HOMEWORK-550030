@@ -8,6 +8,7 @@ public class ComandoVai implements Comando {
 	
 	private IO io;
 	private String direzione;
+	private final static String NOME = "vai";
 	
 	@Override
 	public void esegui(Partita partita) {
@@ -15,7 +16,6 @@ public class ComandoVai implements Comando {
 		Stanza prossimaStanza = null;
 		if(this.direzione==null) {
 			io.mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
-			return;
 		}
 		prossimaStanza=stanzaCorrente.getStanzaAdiacente(this.direzione);
 		if(prossimaStanza==null) {
@@ -36,13 +36,13 @@ public class ComandoVai implements Comando {
 	@Override
 	public String getParametro() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.direzione;
 	}
 
 	@Override
 	public String getNome() {
 		// TODO Auto-generated method stub
-		return null;
+		return NOME;
 	}
 
 	@Override

@@ -6,13 +6,18 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
-
-	Partita p = new Partita();
-	Stanza s1 = new Stanza("s1");
-	Stanza s2 = new Stanza("s2");
+	
+	Labirinto l = new LabirintoBuilder()
+			.addStanzaIniziale("Atrio")
+			.addStanzaVincente("Biblioteca")
+			.getLabirinto();
+	Partita p = new Partita(l);
+	Stanza s = new Stanza("cucina");
 	
 	@Test
 	public void testPartitaNonVinta() {
@@ -21,17 +26,21 @@ public class PartitaTest {
 	
 	@Test
 	public void testPartitaVinta() {
-		p.setStanzaCorrente(s2);
-		p.getLabirinto().setUscita(s2);
+		p.setStanzaCorrente(s);;
+		p.getLabirinto().setUscita(s);
 		assertTrue(p.vinta());
 	}
 	
 	@Test
 	public void testStanzaCorrente() {
-		p.setStanzaCorrente(s2);
-		assertEquals(p.getStanzaCorrente(),s2);
+		p.setStanzaCorrente(s);
+		assertEquals(p.getStanzaCorrente(),s);
 	}
 	
+	@Test
+	public void testGetStanzaVincente() {
+		assertEquals("Biblioteca", p.getLabirinto().getUscita().getNome());
+	}
 	
 	@Test
 	public void testParitaInCorso() {
