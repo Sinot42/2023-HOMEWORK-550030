@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.Direzione;
+import it.uniroma3.diadia.giocatore.AbstractPersonaggio;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -26,7 +28,8 @@ public class Stanza {
 
 	private String nome;
 	private List<Attrezzo> attrezzi;
-	private Map<String,Stanza> stanzeAdiacenti;
+	private Map<Direzione,Stanza> stanzeAdiacenti;
+	private AbstractPersonaggio personaggio;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -36,6 +39,7 @@ public class Stanza {
 		this.nome=nome;
 		this.attrezzi=new ArrayList<>();
 		this.stanzeAdiacenti=new HashMap<>();
+		this.personaggio=null;
 	}
 
 	/**
@@ -44,16 +48,20 @@ public class Stanza {
 	 * @param direzione direzione in cui sara' posta la stanza adiacente.
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+	public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
 		this.stanzeAdiacenti.put(direzione, stanza);
 	}
+
 
 	/**
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
-		return this.stanzeAdiacenti.get(direzione);
+	public Stanza getStanzaAdiacente(Direzione direzione) {
+		Stanza stanza = null;
+		if (this.stanzeAdiacenti.containsKey(direzione))
+			stanza = this.stanzeAdiacenti.get(direzione);
+		return stanza;
 	}
 
 	/**
@@ -97,6 +105,10 @@ public class Stanza {
 		risultato.append(this.getDirezioni().toString());
 		risultato.append("\nAttrezzi nella stanza: ");
 		risultato.append(this.getAttrezzi().toString());
+		if(this.getPersonaggio()!=null) {
+			risultato.append("\nIn questa stanza si trova il personaggio : ");
+		risultato.append(this.getPersonaggio().toString());
+		}
 		return risultato.toString();
 	}
 
@@ -155,7 +167,7 @@ public class Stanza {
 	}
 
 
-	public Set<String> getDirezioni() {
+	public Set<Direzione> getDirezioni() {
 		return stanzeAdiacenti.keySet();
 	}
 
@@ -178,6 +190,15 @@ public class Stanza {
 			return false;
 		Stanza that = (Stanza) obj;
 		return this.getNome().equals(that.getNome());
+	}
+	
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+
+	public AbstractPersonaggio getPersonaggio() {
+		// TODO Auto-generated method stub
+		return this.personaggio;
 	}
 
 }

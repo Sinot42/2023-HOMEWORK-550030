@@ -16,7 +16,7 @@ public class StanzaBuiaTest {
 	@Before
 	public void setUp() {
 		this.a=new Attrezzo("lanterna",2);
-		this.s=new StanzaBuia("stanza",a);
+		this.s=new StanzaBuia("stanza",a.getNome());
 	}
 	
 	@Test

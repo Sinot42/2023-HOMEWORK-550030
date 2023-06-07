@@ -7,16 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 
 public class LabirintoBuilderTest {
-	LabirintoBuilder lb;
+	Labirinto.LabirintoBuilder lb;
 
 	@Before
 	public void setUp() throws Exception {
-		lb = new LabirintoBuilder();
+		lb = new LabirintoBuilder("labirinto.txt");
 	}
 
 	@After
@@ -34,7 +34,7 @@ public class LabirintoBuilderTest {
 	public void testAddStanza() {
 		lb.addStanzaIniziale("stanzetta");
 		Stanza expected = new Stanza("stanzetta");
-		assertEquals(expected, lb.getNome2Stanza().get("stanzetta"));
+		assertEquals(expected, lb.getNome2stanza().get("stanzetta"));
 	}
 
 	
@@ -43,6 +43,6 @@ public class LabirintoBuilderTest {
     public void testAddAttrezzoConStanza() {
         lb.addStanzaIniziale("stanzetta");
         lb.addAttrezzo("cacciavite", 3);
-        assertTrue(lb.getNome2Stanza().get("stanzetta").hasAttrezzo("cacciavite"));
+        assertTrue(lb.getNome2stanza().get("stanzetta").hasAttrezzo("cacciavite"));
     }
 }

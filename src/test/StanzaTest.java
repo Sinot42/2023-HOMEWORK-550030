@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.Direzione;
 
 public class StanzaTest {
 
@@ -21,13 +22,13 @@ public class StanzaTest {
 
 	@Test
 	public void testImpostaStanzaAdiacente() {
-		salone.impostaStanzaAdiacente("nord", cucina);
-		assertEquals(cucina,salone.getStanzaAdiacente("nord"));
+		salone.impostaStanzaAdiacente(Direzione.nord, cucina);
+		assertEquals(cucina,salone.getStanzaAdiacente(Direzione.nord));
 	}
 	
 	@Test
 	public void testImpostaStanzaAdiacenteNull() {
-		assertNull(salone.getStanzaAdiacente("nord"));
+		assertNull(salone.getStanzaAdiacente(Direzione.nord));
 	}
 	
 	

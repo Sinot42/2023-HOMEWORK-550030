@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +11,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.ComandoPosa;
@@ -20,15 +23,19 @@ public class ComandoPosaTest {
 	private Comando posa;
 	private IO io;
 	private Labirinto l;
+	private Stanza s;
 	
 	@Before
 	public void setUp() throws Exception{
-		l=new Labirinto();
+		s = new Stanza("salone");
+		l=Labirinto.newBuilder("labirinto3.txt").getLabirinto();
 		a = new Attrezzo("spada",2);
 		p = new Partita(l);
 		posa = new ComandoPosa();
-		io = new IOConsole();
+		io = new IOConsole(new Scanner(System.in));
 		posa.setIo(io);
+		p.setStanzaCorrente(s);
+		
 	}
 
 

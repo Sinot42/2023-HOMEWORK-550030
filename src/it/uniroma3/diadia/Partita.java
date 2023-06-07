@@ -78,6 +78,11 @@ public class Partita {
 		this.finita = true;
 	}
 
+	public boolean giocatoreIsVivo() {
+		// TODO Auto-generated method stub
+		return this.giocatore.getCfu()>0;
+	}
+
 
 	
 }
